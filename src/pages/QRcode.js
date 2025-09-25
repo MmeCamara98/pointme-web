@@ -10,6 +10,7 @@ import { MdQrCode } from "react-icons/md"; // ✅ icône QR valide
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { QRCodeCanvas } from "qrcode.react";
+import bgImage from "../assets/bg.png"; // ✅ ton image dans assets
 
 
 export default function AttendancePage() {
@@ -35,12 +36,19 @@ export default function AttendancePage() {
 );
 
   return (
-     <div className="flex h-screen bg-gray-100">
+      <div
+      className="flex h-screen"
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: "",
+        backgroundPosition: "center",
+      }}
+    >
       {/* Sidebar */}
       <Sidebar />
 
       {/* Contenu principal */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col ">
         <Header />
         
         <main className="p-6 space-y-6">

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { CalendarDays, Clock, AlertCircle, Search, Download } from "lucide-react";
+import { Clock, AlertCircle, Search, Download } from "lucide-react";
 import Sidebar from "../component/Sidebar";
 import Header from "../component/Header";
 import ListeTable from "../component/ListeTable";
 import { FiCalendar } from "react-icons/fi";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import bgImage from "../assets/bg.png"; // ✅ ton image dans assets
 
 export default function ClockPage() {
   const records = useSelector((state) => state.clock.records);
@@ -16,31 +17,36 @@ export default function ClockPage() {
   const [startDate, setStartDate] = useState(null);
   const [open, setOpen] = useState(false);
 
-  const filtered = records.filter((r) =>
-    r.name.toLowerCase().includes(search.toLowerCase()) &&
-    (statusFilter ? r.status === statusFilter : true)
+  const filtered = records.filter(
+    (r) =>
+      r.name.toLowerCase().includes(search.toLowerCase()) &&
+      (statusFilter ? r.status === statusFilter : true)
   );
 
   const onTimeCount = records.filter((r) => r.status === "À l'heure").length;
   const lateCount = records.filter((r) => r.status === "En retard").length;
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      {/* Fond décoratif */}
-      
-
+    <div
+      className="flex h-screen"
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: "",
+        backgroundPosition: "center",
+      }}
+    >
       {/* Sidebar */}
       <Sidebar />
 
       {/* Contenu principal */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col ">
         <Header />
 
         <main className="p-6 space-y-6">
-             <div className="mb-4">
-                           <h3 className="text-lg font-semibold mb-2">Liste des Stagiaires</h3>
-                          
-                         </div>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold mb-2">Liste des Stagiaires</h3>
+          </div>
+
           {/* Cartes de résumé */}
           <div className="flex space-x-10 ">
             <Card title="À l'heure" value={onTimeCount} icon={<Clock />} />
@@ -48,7 +54,6 @@ export default function ClockPage() {
           </div>
 
           {/* Sélecteur de date */}
-          
           <div className="flex items-center gap-4 p-4">
             <div className="relative">
               <button
@@ -74,21 +79,20 @@ export default function ClockPage() {
             </div>
           </div>
 
-
           {/* Filtres + recherche + export */}
           <div className="bg-white p-6 rounded-2xl shadow">
             <div className="flex space-x-2">
               {/* Barre de recherche */}
               <div className="flex items-center gap-2 border px-3 py-2 rounded-xl bg-white w-60 shadow-lg">
-                    <Search className="text-gray-500" />
-                    <input
-                      type="text"
-                      placeholder="Rechercher un stagiaire..."
-                      value={search}
-                      onChange={(e) => setSearch(e.target.value)}
-                      className="bg-transparent outline-none text-sm w-full"
-                    />
-                  </div>
+                <Search className="text-gray-500" />
+                <input
+                  type="text"
+                  placeholder="Rechercher un stagiaire..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="bg-transparent outline-none text-sm w-full"
+                />
+              </div>
 
               {/* Filtre statut */}
               <select
@@ -122,7 +126,6 @@ export default function ClockPage() {
             {/* Tableau */}
             <ListeTable records={filtered} />
           </div>
-          
         </main>
       </div>
     </div>

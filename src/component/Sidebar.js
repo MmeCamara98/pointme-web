@@ -1,11 +1,19 @@
 import React from "react";
 import { Home, QrCode, Ban, List } from "lucide-react";
+import loginImage from '../assets/logo2.png';
 
 
 function Sidebar() {
   return (
     <div className="w-64 bg-teal-600 text-white flex flex-col p-5">
-      <div className="text-2xl font-bold mb-10">Easy point-me</div>
+         
+      <div className="text-2xl font-bold mb-10">
+        <img
+            src={loginImage}
+            alt="Personne utilisant un ordinateur portable"
+            className="w-full max-w-lg"
+          />
+      </div>
       <nav className="space-y-5">
         <a href="/dashboard" className="flex items-center gap-3 hover:bg-teal-700 p-2 rounded-lg">
           <Home size={20}/> Dashboard

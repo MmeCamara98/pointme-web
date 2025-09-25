@@ -33,8 +33,7 @@ const navigate = useNavigate();
       <div className="hidden lg:flex flex-1 flex-col justify-between text-white p-10 relative overflow-hidden">
         
         {/* ==== BLOBS ORANGES ==== */}
-        <div className="absolute -top-20 -left-20 w-[500px] h-[500px] bg-orange-500/80 rounded-[60%] blur-3xl z-0"></div>
-        <div className="absolute top-1/2 -right-32 w-[400px] h-[400px] bg-orange-400/70 rounded-[60%] blur-3xl z-0"></div>
+       
 
         {/* Texte d’accueil */}
         <div className="relative z-10">

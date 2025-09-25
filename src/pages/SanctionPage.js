@@ -7,6 +7,7 @@ import { AlertCircle, ShieldAlert, Ban, Bell, Search } from "lucide-react";
 import { FiSearch, FiPlus } from "react-icons/fi";
 import SanctionFormModal from "../component/SanctionFormModal";
 import { addSanction } from "../features/sanctionSlice";
+import bgImage from "../assets/bg.png"; // ✅ ton image dans assets
 
 
 export default function SanctionDashboard() {
@@ -43,12 +44,19 @@ const [open, setOpen] = useState(false);
   const renvois = sanctions.filter((s) => s.niveau === "Renvoi").length;
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div
+      className="flex h-screen"
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: "",
+        backgroundPosition: "center",
+      }}
+    >
       {/* Sidebar */}
       <Sidebar />
 
       {/* Contenu principal */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col ">
         <Header />
 
         <main className="p-6 space-y-6">
