@@ -4,7 +4,7 @@ import { Clock, AlertCircle, Search, Download } from "lucide-react";
 import Sidebar from "../component/Sidebar";
 import Header from "../component/Header";
 import ListeTable from "../component/ListeTable";
-import { FiCalendar } from "react-icons/fi";
+import { Calendar } from "lucide-react";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import bgImage from "../assets/bg.png"; // ✅ ton image dans assets
@@ -60,7 +60,7 @@ export default function ClockPage() {
                 onClick={() => setOpen(!open)}
                 className="flex items-center gap-2 bg-white px-6 py-3 rounded-2xl shadow-xl hover:shadow-lg transition"
               >
-                <FiCalendar className="text-teal-600" size={22} />
+                <Calendar className="text-teal-600" size={22} />
                 <span className="text-black font-medium">Choisir une date</span>
               </button>
 

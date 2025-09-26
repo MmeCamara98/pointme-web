@@ -3,38 +3,35 @@ import { useSelector, useDispatch } from "react-redux";
 import Sidebar from "../component/Sidebar";
 import Header from "../component/Header";
 import SanctionTable from "../component/SanctionTable";
-import { AlertCircle, ShieldAlert, Ban, Bell, Search } from "lucide-react";
-import { FiSearch, FiPlus } from "react-icons/fi";
+import {
+  AlertCircle,
+  ShieldAlert,
+  Ban,
+  Bell,
+  Search,
+  Plus,
+} from "lucide-react"; // ✅ tout vient de lucide-react maintenant
 import SanctionFormModal from "../component/SanctionFormModal";
 import { addSanction } from "../features/sanctionSlice";
 import bgImage from "../assets/bg.png"; // ✅ ton image dans assets
-
 
 export default function SanctionDashboard() {
   const sanctions = useSelector((state) => state.sanction.sanctions) || [];
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-  
   const [tab, setTab] = useState("Mes sanctions");
+  const [open, setOpen] = useState(false);
 
-  const filtered = sanctions.filter((s) =>
-    s.name.toLowerCase().includes(search.toLowerCase())
-  );
-const [open, setOpen] = useState(false);
-  // Filtrage par nom
   const filteredSanctions = sanctions.filter((s) =>
     s.name.toLowerCase().includes(search.toLowerCase())
   );
-  // ✅ Gestion édition et suppression (optionnel)
+
   const handleEdit = (sanction) => {
     console.log("Éditer sanction :", sanction);
-    // Ici tu pourrais rouvrir la modale pré-remplie
   };
 
   const handleDelete = (id) => {
     console.log("Supprimer sanction id:", id);
-    // Tu peux créer un reducer removeSanction dans sanctionSlice
-    // dispatch(removeSanction(id));
   };
 
   // Statistiques
@@ -60,77 +57,89 @@ const [open, setOpen] = useState(false);
         <Header />
 
         <main className="p-6 space-y-6">
-         
-
           {/* Cartes de stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <StatCard title="Total Sanctions" value={total} icon={<Bell />} />
-            <StatCard title="Avertissements" value={warnings} icon={<ShieldAlert />} />
-            <StatCard title="Suspensions" value={suspensions} icon={<Ban />} />
+            <StatCard
+              title="Avertissements"
+              value={warnings}
+              icon={<ShieldAlert />}
+            />
+            <StatCard
+              title="Suspensions"
+              value={suspensions}
+              icon={<Ban />}
+            />
             <StatCard title="Renvois" value={renvois} icon={<AlertCircle />} />
           </div>
+
           <div className="space-y-6">
-    <div className="flex gap-2 bg-gray-100 p-1 rounded-lg w-fit">
-  {["Mes sanctions", "Alertes"].map((label) => (
-    <button
-      key={label}
-      onClick={() => setTab(label)}
-      className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
-        tab === label
-          ? "bg-white text-teal-600 shadow-sm"   // ✅ style actif
-          : "text-gray-600 hover:bg-white"       // ✅ style inactif
-      }`}
-    >
-      {label}
-    </button>
-  ))}
-</div>
+            {/* Onglets */}
+            <div className="flex gap-2 bg-gray-100 p-1 rounded-lg w-fit">
+              {["Mes sanctions", "Alertes"].map((label) => (
+                <button
+                  key={label}
+                  onClick={() => setTab(label)}
+                  className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                    tab === label
+                      ? "bg-white text-teal-600 shadow-sm"
+                      : "text-gray-600 hover:bg-white"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
 
-<div className="flex items-center justify-between gap-3">
-  {/* Bloc gauche : recherche + filtre */}
-  <div className="flex gap-3 flex-grow">
-    {/* Barre de recherche */}
-    <div className="flex items-center gap-2 border px-3 py-2 rounded-xl bg-white w-64">
-      <Search className="text-gray-500" />
-      <input
-        type="text"
-        placeholder="Rechercher un stagiaire..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="bg-transparent outline-none text-sm w-full"
-      />
-    </div>
+            {/* Recherche + filtre + bouton */}
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex gap-3 flex-grow">
+                {/* Barre de recherche */}
+                <div className="flex items-center gap-2 border px-3 py-2 rounded-xl bg-white w-64">
+                  <Search className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Rechercher un stagiaire..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="bg-transparent outline-none text-sm w-full"
+                  />
+                </div>
 
-    {/* Filtre */}
-    <select className="border px-3 py-2 rounded-xl text-sm bg-white">
-      <option value="">Toutes</option>
-      <option value="Avertissement">Avertissement</option>
-      <option value="Suspension">Suspension</option>
-      <option value="Renvoi">Renvoi</option>
-    </select>
-  </div>
+                {/* Filtre */}
+                <select className="border px-3 py-2 rounded-xl text-sm bg-white">
+                  <option value="">Toutes</option>
+                  <option value="Avertissement">Avertissement</option>
+                  <option value="Suspension">Suspension</option>
+                  <option value="Renvoi">Renvoi</option>
+                </select>
+              </div>
 
-  {/* Bouton complètement à droite */}
-  <button onClick={() => setOpen(true)}
-   className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-xl hover:bg-teal-700 transition">
-    < FiPlus />
-    <span className="text-sm text-black font-bold font-medium" >Nouvelle sanction</span>
-  </button>
-</div>
+              {/* Bouton nouvelle sanction */}
+              <button
+                onClick={() => setOpen(true)}
+                className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-xl hover:bg-teal-700 transition"
+              >
+                <Plus className="text-black" size={18} />
+                <span className="text-sm text-black font-bold">
+                  Nouvelle sanction
+                </span>
+              </button>
+            </div>
+          </div>
 
-
-    </div>
           {/* Tableau des sanctions */}
           <div className="bg-white p-6 rounded-2xl shadow">
-           <h3 className="text-lg font-semibold mb-2">Liste des sanctions</h3>
-
-            {/* Tableau */}
-            <SanctionTable sanctions={filteredSanctions}
-        onEdit={handleEdit}
-        onDelete={handleDelete} />
+            <h3 className="text-lg font-semibold mb-2">Liste des sanctions</h3>
+            <SanctionTable
+              sanctions={filteredSanctions}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
           </div>
-          {/* Modale de création */}
-      <SanctionFormModal open={open} onClose={() => setOpen(false)} />
+
+          {/* Modale */}
+          <SanctionFormModal open={open} onClose={() => setOpen(false)} />
         </main>
       </div>
     </div>

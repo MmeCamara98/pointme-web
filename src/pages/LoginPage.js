@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginStart, loginSuccess, loginFailure } from '../features/authSlice';
-import { FaQrcode, FaChartBar, FaUserFriends } from 'react-icons/fa';
+import { QrCode, BarChart, Users } from 'lucide-react'
+
 import { useNavigate } from "react-router-dom";
 
 import loginImage from '../assets/log.png';
@@ -56,7 +57,7 @@ const navigate = useNavigate();
           {/* Bulle 1 */}
           <div className="absolute -left-5 top-1/2 -translate-y-1/2 transform rounded-lg bg-white/20 p-4 text-white backdrop-blur-sm max-w-xs">
             <div className="flex items-center">
-              <FaQrcode className="h-6 w-6" />
+              <QrCode className="h-6 w-6" />
               <span className="ml-2 font-medium">
                 Système de pointage moderne par QR code unique quotidien
               </span>
@@ -66,7 +67,7 @@ const navigate = useNavigate();
           {/* Bulle 2 */}
           <div className="absolute right-0 top-[20%] -translate-y-1/2 transform rounded-lg bg-white/20 p-4 text-white backdrop-blur-sm max-w-xs">
             <div className="flex items-center">
-              <FaUserFriends className="h-6 w-6" />
+              <Users className="h-6 w-6" />
               <span className="ml-2 font-medium">
                 Une meilleure gestion des pointages
               </span>
@@ -76,7 +77,7 @@ const navigate = useNavigate();
           {/* Bulle 3 */}
           <div className="absolute right-0 bottom-1/4 -translate-y-1/2 transform rounded-lg bg-white/20 p-4 text-white backdrop-blur-sm max-w-xs">
             <div className="flex items-center">
-              <FaChartBar className="h-6 w-6" />
+              <BarChart className="h-6 w-6" />
               <span className="ml-2 font-medium">
                 Analytics en temps réel pour coaches et administrateurs
               </span>
