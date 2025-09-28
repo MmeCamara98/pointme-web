@@ -26,9 +26,9 @@ export default function TraineeTable() {
                 {/* Stagiaire */}
                 <td className="p-3 flex items-center gap-2">
                   <img
-                    src={t.image || "/default-avatar.png"}
-                    alt={t.name}
-                    className="w-8 h-8 rounded-full "
+                    src="https://i.pravatar.cc/40"
+                    alt="profile"
+                    className="w-10 h-10 rounded-full "
                   />
                   <span className="font-medium text-gray-800">{t.name}</span>
                 </td>

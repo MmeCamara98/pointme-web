@@ -8,7 +8,7 @@ const initialState = {
       name: "Wakhoub Gueye",
       time: "08:27",
       date: "2024-09-25",
-      status: "À l'heure",
+      status: "A l'heure",
     },
     {
       id: 2,
@@ -17,7 +17,22 @@ const initialState = {
       date: "2024-09-25",
       status: "En retard",
     },
-    // Ajoute d'autres pointages ici
+    {
+      id: 3,
+      name: "elmor seye ",
+      time: "08:30",
+      date: "2025-09-25",
+      status: "A l'heure",
+    },
+     {
+      id: 2,
+      name: "Wakhoub Gueye",
+      time: "08:50",
+      date: "2024-09-25",
+      status:"En retard",
+    },
+    
+    
   ],
 };
 

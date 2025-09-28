@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addSanction } from "../features/sanctionSlice"; // ✅ action d'ajout
+import { updateSanction } from "../features/sanctionSlice"; // à adapter selon ton slice
 import Modal from "./Modal";
 
-export default function SanctionEditModal({ open, onClose }) {
+export default function SanctionEditModal({ open, onClose, initialData }) {
   const trainees = useSelector((state) => state.trainee.trainees) || [];
   const dispatch = useDispatch();
 
   const [form, setForm] = useState({
-    traineeId: "",
-    motif: "",
-    niveau: "",
-    description: "",
+    traineeId: initialData?.name || "",
+    motif: initialData?.motif || "",
+    niveau: initialData?.niveau || "",
+    description: initialData?.description || "",
   });
 
   const niveaux = ["Avertissement", "Suspension", "Blame"];
-  const motifs = ["Retard répété", "Absence non justifiée", "Manque de respect"];
+  const motifs = ["Retard Repeter", "Absence non justifier", "Manque de respect"];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,36 +27,35 @@ export default function SanctionEditModal({ open, onClose }) {
 
     const trainee = trainees.find((t) => t.name === form.traineeId);
 
-    const newSanction = {
-      id: Date.now(), // ✅ identifiant unique
+    const updated = {
+      ...initialData,
       name: trainee?.name || "Inconnu",
-      email: trainee?.email || "inconnu@email.com",
       image: trainee?.image || "/default-avatar.png",
       motif: form.motif,
       niveau: form.niveau,
       description: form.description,
-      date: new Date().toISOString().split("T")[0], // format YYYY-MM-DD
-      statut: "Non lue",
     };
 
-    dispatch(addSanction(newSanction));
+    dispatch(updateSanction(updated));
     onClose();
   };
 
   return (
-    <Modal open={open} onClose={onClose} title="Créer une sanction" className="text-xl">
+    <Modal open={open} onClose={onClose} title="Modifier la sanction">
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Stagiaire */}
         <div>
-          <label className="block text-sm font-medium text-gray-800 mb-1">Stagiaire</label>
+          <label className="block text-sm font-medium text-gray-800 mb-1">
+            Stagiaire
+          </label>
           <select
             name="traineeId"
             value={form.traineeId}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-xl bg-gray-200 text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-xl bg-gray-200 text-sm "
             required
           >
-            <option value="">Sélectionner un stagiaire</option>
+            <option value="">Selectionner un stagiaire</option>
             {trainees.map((t, index) => (
               <option key={index} value={t.name}>
                 {t.name}
@@ -67,7 +66,9 @@ export default function SanctionEditModal({ open, onClose }) {
 
         {/* Motif */}
         <div>
-          <label className="block text-sm font-medium text-gray-800 mb-1">Motif</label>
+          <label className="block text-sm font-medium text-gray-800 mb-1">
+            Motif
+          </label>
           <select
             name="motif"
             value={form.motif}
@@ -75,7 +76,7 @@ export default function SanctionEditModal({ open, onClose }) {
             className="w-full px-3 py-2 border border-gray-300 rounded-xl bg-gray-200 text-sm"
             required
           >
-            <option value="">Sélectionner un motif</option>
+            <option value="">Selectionner un motif</option>
             {motifs.map((m, index) => (
               <option key={index} value={m}>
                 {m}
@@ -86,17 +87,19 @@ export default function SanctionEditModal({ open, onClose }) {
 
         {/* Niveau */}
         <div>
-          <label className="block text-sm font-medium text-gray-800 mb-1">Niveau de sanction</label>
+          <label className="block text-sm font-medium text-gray-800 mb-1">
+            Niveau de sanction
+          </label>
           <select
             name="niveau"
             value={form.niveau}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-xl bg-gray-200 text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-xl bg-gray-200 text-sm focus:outline-none  "
             required
           >
-            <option value="">Sélectionner un niveau</option>
+            <option value="">Selectionner un sanction</option>
             {niveaux.map((n, index) => (
-              <option key={index} value={n}>
+              <option key={index} value={n} className="bg-white rounded-2xl">
                 {n}
               </option>
             ))}
@@ -105,12 +108,14 @@ export default function SanctionEditModal({ open, onClose }) {
 
         {/* Description */}
         <div>
-          <label className="block text-sm font-medium text-gray-800 mb-1">Description détaillée</label>
+          <label className="block text-sm font-medium text-gray-800 mb-1">
+            Description détaillée
+          </label>
           <textarea
             name="description"
             value={form.description}
             onChange={handleChange}
-            placeholder="Décrire les faits, les contextes et les mesures prises..."
+            placeholder="Décrire les faits, les contextes et les mesures prise..."
             rows={4}
             className="w-full px-3 py-2 border border-gray-300 rounded-xl bg-gray-200 text-sm"
             required
@@ -130,7 +135,7 @@ export default function SanctionEditModal({ open, onClose }) {
             type="submit"
             className="px-4 py-2 text-sm bg-teal-600 text-white rounded-md hover:bg-teal-700"
           >
-            Créer et Notifier
+            Creer et Notifier
           </button>
         </div>
       </form>

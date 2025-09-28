@@ -21,6 +21,7 @@ export default function SanctionDashboard() {
   const dispatch = useDispatch();
   const [tab, setTab] = useState("Mes sanctions");
   const [open, setOpen] = useState(false);
+   const [statusFilter, setStatusFilter] = useState("");
 
   const filteredSanctions = sanctions.filter((s) =>
     s.name.toLowerCase().includes(search.toLowerCase())
@@ -95,7 +96,7 @@ export default function SanctionDashboard() {
             <div className="flex items-center justify-between gap-3">
               <div className="flex gap-3 flex-grow">
                 {/* Barre de recherche */}
-                <div className="flex items-center gap-2 border px-3 py-2 rounded-xl bg-white w-64">
+                <div className="flex items-center gap-2 border px-3 py-2 rounded-2xl bg-white w-64">
                   <Search className="text-gray-500" />
                   <input
                     type="text"
@@ -113,6 +114,16 @@ export default function SanctionDashboard() {
                   <option value="Suspension">Suspension</option>
                   <option value="Renvoi">Renvoi</option>
                 </select>
+                 {/* Filtre statut */}
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="border px-3 py-2 shadow-lg rounded-xl bg-white text-sm w-40"
+              >
+                <option value="">status</option>
+                <option value="Non lues">Non lue</option>
+                <option value="Lue">Lue</option>
+              </select>
               </div>
 
               {/* Bouton nouvelle sanction */}

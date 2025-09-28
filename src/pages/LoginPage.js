@@ -75,7 +75,7 @@ const navigate = useNavigate();
           </div>
 
           {/* Bulle 3 */}
-          <div className="absolute right-0 bottom-1/4 -translate-y-1/2 transform rounded-lg bg-white/20 p-4 text-white backdrop-blur-sm max-w-xs">
+          <div className="absolute right-0 bottom-1/3 -translate-y-1/2 transform rounded-lg bg-white/20 p-4 text-white backdrop-blur-sm max-w-xs">
             <div className="flex items-center">
               <BarChart className="h-6 w-6" />
               <span className="ml-2 font-medium">

@@ -11,7 +11,7 @@ import bgImage from "../assets/bg.png";
 
 export default function Dashboard() {
   const dashboard = useSelector((state) => state.dashboard) || {};
-  const { total = 0, presents = 0, late = 0, trainees = [] } = dashboard;
+  const { total = 4, presents = 0, late = 0, trainees = [] } = dashboard;
   const [search, setSearch] = useState("");
 
   const filteredTrainees = trainees.filter(
