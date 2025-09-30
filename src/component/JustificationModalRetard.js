@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Modal from "./Modal";
 
 export default function JustificationModal({ open, onClose, onValidate, onReply, justification }) {
   const [response, setResponse] = useState("");
@@ -6,7 +7,7 @@ export default function JustificationModal({ open, onClose, onValidate, onReply,
 
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 w-30">
+    <Modal open={open} onClose={onClose}>
       <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-lg">
         {/* Titre */}
         <div className="flex justify-center  mb-5">
@@ -104,6 +105,6 @@ export default function JustificationModal({ open, onClose, onValidate, onReply,
           </button>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }

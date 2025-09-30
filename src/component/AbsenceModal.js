@@ -4,7 +4,7 @@ import React, { useState } from "react";
 export default function AbsenceModal({ open, onClose, onSend }) {
   const [message, setMessage] = useState("");
 
-  if (!open) return null;
+
 
   return (
 

@@ -9,7 +9,6 @@ export default function DailyTable() {
 
   const openModal = (user) => setSelectedUser(user);
   const closeModal = () => setSelectedUser(null);
-  
 
   return (
     <div className="overflow-x-auto mt-6">
@@ -23,19 +22,23 @@ export default function DailyTable() {
             <th className="p-3">Action</th>
           </tr>
         </thead>
+
         <tbody>
           {clockRecords.length > 0 ? (
             clockRecords.map((r, index) => {
-              const status = r.status?.trim().toLowerCase();
+              // ✅ On compare en minuscule mais on garde l'affichage original
+              const statusLower = r.status?.trim().toLowerCase();
 
               return (
                 <tr
                   key={r.id || index}
                   className={`${
                     index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                  } hover:bg-gray-100`}
+                  } hover:bg-gray-100 `} 
                 >
-                  <td className="p-3 flex items-center gap-3 whitespace-nowrap">
+                  {/* Nom et avatar */}
+                  
+                  <td className="p-3 flex items-center gap-3 whitespace-nowrap ">
                     <img
                       src="https://i.pravatar.cc/40"
                       alt="profile"
@@ -44,45 +47,47 @@ export default function DailyTable() {
                     <span className="font-medium text-gray-800">{r.name}</span>
                   </td>
 
+                  {/* Heure */}
                   <td className="p-3 text-gray-700 whitespace-nowrap">
                     {r.time || "—"}
                   </td>
 
-                  <td className="p-3 text-gray-700 whitespace-nowrap">
+                  {/* Date du jour */}
+                  <td className="p-3 text-gray-700 whitespace-nowrap ">
                     {new Date().toLocaleDateString("fr-FR")}
                   </td>
 
+                  {/* Statut */}
                   <td className="p-3 whitespace-nowrap">
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                        status ==="A l'heure"
+                        statusLower === "a l'heure"
                           ? "bg-teal-600 text-white"
-                          : status === "En retard"
+                          : statusLower === "en retard"
                           ? "bg-orange-400 text-white"
                           : "bg-gray-100 text-gray-700"
                       }`}
                     >
+                      {/* ✅ Affiche exactement ce qui vient de la BDD/Redux (ex: "A l'heure", "En retard") */}
                       {r.status}
                     </span>
                   </td>
 
+                  {/* Action */}
                   <td className="p-3 text-gray-600 whitespace-nowrap">
-  {status === "a retard" && (
-    <div
-      onClick={() => openModal(r)}
-      className="relative w-10 h-10 flex items-center justify-center rounded-lg border border-orange-500 bg-white hover:bg-orange-50 cursor-pointer"
-    >
-      {/* Bulle vide stylisée */}
-      <div className="w-5 h-5 rounded-sm border-2 border-orange-500 relative">
-        <div className="absolute bottom-[-4px] left-1 w-2 h-2 rotate-45 bg-white border-l-2 border-b-2 border-orange-500"></div>
-      </div>
-
-      {/* Pastille de notification */}
-      <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-orange-500 rounded-full border border-white"></span>
-    </div>
-  )}
-</td>
-
+                    {statusLower === "en retard" && (
+                      <div
+                        onClick={() => openModal(r)}
+                        className="relative w-10 h-10 flex items-center justify-center 
+                                   rounded-lg border border-orange-500 bg-white 
+                                   hover:bg-orange-50 cursor-pointer "
+                      >
+                        <MessageSquareText className="w-6 h-6 text-orange-500" />
+                        <span className="absolute top-1 right-1 w-2.5 h-2.5 
+                                         bg-orange-500 rounded-full border border-red"></span>
+                      </div>
+                    )}
+                  </td>
                 </tr>
               );
             })
@@ -96,6 +101,7 @@ export default function DailyTable() {
         </tbody>
       </table>
 
+      {/* Modal d'envoi de message */}
       {selectedUser && (
         <ModalMessage user={selectedUser} onClose={closeModal} />
       )}
