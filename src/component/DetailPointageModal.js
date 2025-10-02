@@ -11,9 +11,9 @@ export default function SanctionSummaryModal({ open, onClose, data }) {
     <Modal open={open} onClose={onClose} title="Détail des pointages">
       <div className="p-4 space-y-4">
         {/* Infos stagiaire */}
-        <div className="flex items-center gap-4 bg-gray-200 rounded-xl w-50 ">
+        <div className="flex items-center gap-4  bg-gray-200 rounded-xl">
           <img
-            src={"https://i.pravatar.cc/60"}
+            src={ "https://i.pravatar.cc/60"}
             alt="profile"
             className="w-14 h-14 rounded-full object-cover"
           />
@@ -57,24 +57,30 @@ export default function SanctionSummaryModal({ open, onClose, data }) {
         {/* Résumé des sanctions */}
         <div className="grid grid-cols-3 gap-3 text-center">
           <div className="bg-teal-600 text-white rounded-lg py-4">
-            <div className="text-sm font-medium">Avertissement</div>
+            <div className="text-sm font-medium">Present</div>
             <div className="text-2xl font-bold">{data.avertissement || 0}</div>
           </div>
           <div className="bg-orange-500 text-white rounded-lg py-4">
-            <div className="text-sm font-medium">Blâme</div>
+            <div className="text-sm font-medium">Absence</div>
             <div className="text-2xl font-bold">{data.blame || 0}</div>
           </div>
           <div className="bg-red-500 text-white rounded-lg py-4">
-            <div className="text-sm font-medium">Suspension</div>
+            <div className="text-sm font-medium">Retard</div>
             <div className="text-2xl font-bold">{data.suspension || 0}</div>
           </div>
         </div>
 
         {/* Bouton OK */}
-        <div className="flex justify-center mt-6">
+        <div className="flex  space-x-22 justify-center mt-6 gap-2 ml-4 ">
+            <button
+            onClick={onClose}
+            className="px-6 py-2 bg-red text-white ml-4 rounded-3xl bg-red-400 w-30 "
+          >
+            Sanction
+          </button>
           <button
             onClick={onClose}
-            className="px-6 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700"
+            className="px-6 py-2 bg-teal-600 text-white rounded-3xl w-32 "
           >
             Ok
           </button>

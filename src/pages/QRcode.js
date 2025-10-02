@@ -3,13 +3,12 @@ import { useSelector } from "react-redux";
 import { Clock, AlertCircle, Search, Download } from "lucide-react";
 import Sidebar from "../component/Sidebar";
 import Header from "../component/Header";
-import ListeTable from "../component/DailyTable";
-import { Calendar } from "lucide-react";
+
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import bgImage from "../assets/bg.png"; // ✅ ton image dans assets
+import bgImage from "../assets/bg1.png"; // ✅ ton image dans assets
 import DailyTable from "../component/DailyTable";
-import { QRCodeCanvas } from "qrcode.react";
+
 import {
   Calendar as CalendarIcon,
   QrCode,
@@ -25,7 +24,7 @@ export default function ClockPage() {
   const [startDate, setStartDate] = useState(null);
   const [open, setOpen] = useState(false);
    const [showQr, setShowQr] = useState(false);
-   const [showQrModal, setShowQrModal] = useState(false);
+  
 
   const filtered = records.filter(
     (r) =>

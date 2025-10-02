@@ -2,13 +2,26 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { MessageSquareText } from "lucide-react";
 import ModalMessage from "./ModalMessage";
+import SanctionSummaryModal from "./DetailPointageModal";
 
 export default function DailyTable() {
   const clockRecords = useSelector((state) => state.clock?.records || []);
   const [selectedUser, setSelectedUser] = useState(null);
-
   const openModal = (user) => setSelectedUser(user);
   const closeModal = () => setSelectedUser(null);
+  const [showSummaryModal, setShowSummaryModal] = useState(false);
+  const [summaryData, setSummaryData] = useState({});
+    const handleOpenSummary = (record) => {
+    setSummaryData({
+      name: record.name,
+      email: record.email,
+      image: record.image || "https://i.pravatar.cc/60",
+      avertissement: record.present || 0,
+      blame: record.absence || 0,
+      suspension: record.retard || 0,
+    });
+    setShowSummaryModal(true);
+  };
 
   return (
     <div className="overflow-x-auto mt-6">
@@ -34,31 +47,33 @@ export default function DailyTable() {
                   key={r.id || index}
                   className={`${
                     index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                  } hover:bg-gray-100 `} 
+                  } `} 
                 >
                   {/* Nom et avatar */}
                   
-                  <td className="p-3 flex items-center gap-3 whitespace-nowrap ">
-                    <img
-                      src="https://i.pravatar.cc/40"
-                      alt="profile"
-                      className="w-10 h-10 rounded-full"
-                    />
-                    <span className="font-medium text-gray-800">{r.name}</span>
-                  </td>
+                   <td
+  className="p-3 flex items-center gap-3 cursor-pointer "
+  onClick={() => handleOpenSummary(r)}
+>
+  <img src="https://i.pravatar.cc/40" alt="profile" className="w-10 h-10 rounded-full" />
+  <div className="flex flex-col">
+    <span className="font-medium text-gray-800">{r.name}</span>
+    <span className="text-xs text-gray-500 italic">{r.email}</span>
+  </div>
+</td>
 
                   {/* Heure */}
-                  <td className="p-3 text-gray-700 whitespace-nowrap">
+                  <td className="p-3 text-gray-700 cursor-pointer" onClick={() => handleOpenSummary(r)}>
                     {r.time || "—"}
                   </td>
 
                   {/* Date du jour */}
-                  <td className="p-3 text-gray-700 whitespace-nowrap ">
+                  <td className="p-3 text-gray-700 cursor-pointer" onClick={() => handleOpenSummary(r)}>
                     {new Date().toLocaleDateString("fr-FR")}
                   </td>
 
                   {/* Statut */}
-                  <td className="p-3 whitespace-nowrap">
+                  <td className="p-3 cursor-pointer" onClick={() => handleOpenSummary(r)}>
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-semibold ${
                         statusLower === "a l'heure"
@@ -104,6 +119,13 @@ export default function DailyTable() {
       {/* Modal d'envoi de message */}
       {selectedUser && (
         <ModalMessage user={selectedUser} onClose={closeModal} />
+      )}
+      {showSummaryModal && (
+        <SanctionSummaryModal
+          open={true}
+          onClose={() => setShowSummaryModal(false)}
+          data={summaryData}
+        />
       )}
     </div>
   );

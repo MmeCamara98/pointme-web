@@ -1,11 +1,12 @@
 import React from "react";
-import { Trash2 } from "lucide-react";
+
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import AbsenceModal from "./AbsenceModal";
 import SanctionEditModal from "./SanctionFormModal";
 import JustificationModal from "./JustificationModal";
 import RetardModal from "./JustificationModalRetard";
+import SanctionSummaryModal from "./DetailPointageModal";
 
 
 export default function ListeTableau({ onDelete }) {
@@ -17,6 +18,21 @@ export default function ListeTableau({ onDelete }) {
   const [showJustificationModal, setShowJustificationModal] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [showRetardModal, setShowRetardModal] = useState(false);
+  const [showSummaryModal, setShowSummaryModal] = useState(false);
+  const [summaryData, setSummaryData] = useState({});
+  const handleOpenSummary = (record) => {
+  setSummaryData({
+    name: record.name,
+    email: record.email,
+    image: record.image || "https://i.pravatar.cc/60",
+    avertissement: record.present || 0,
+    blame: record.absence || 0,
+    suspension: record.retard || 0,
+  });
+  setShowSummaryModal(true);
+};
+
+
 
    
 
@@ -40,49 +56,47 @@ export default function ListeTableau({ onDelete }) {
               <tr
                 key={r.id || index}
                 className={`${
-                  index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                } hover:bg-gray-100`}
+                  index % 2 === 0 ? "bg-white" : "bg-gray-100 rounded-md"
+                } `}
               >
                 {/* Stagiaire */}
-                <td className="p-3 flex items-center gap-3 whitespace-nowrap">
-                  <img
-                      src="https://i.pravatar.cc/40"
-                      alt="profile"
-                      className="w-10 h-10 rounded-full"
-                    />
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">{r.name}</span>
-                    <span className="text-xs text-gray-500 italic">{r.email}</span>
-                  </div>
-                </td>
+                <td
+  className="p-3 flex items-center gap-3 cursor-pointer "
+  onClick={() => handleOpenSummary(r)}
+>
+  <img src="https://i.pravatar.cc/40" alt="profile" className="w-10 h-10 rounded-full" />
+  <div className="flex flex-col">
+    <span className="font-medium text-gray-800">{r.name}</span>
+    <span className="text-xs text-gray-500 italic">{r.email}</span>
+  </div>
+</td>
 
                 {/* Statut */}
-                <td className="p-3 whitespace-nowrap">
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                      r.status === "Present"
-                        ? "bg-green-100 text-green-700"
-                        : r.status === "Retard"
-                        ? "bg-orange-100 text-orange-600"
-                        : "bg-red-100 text-red-700"
-                    }`}
-                  >
-                    {r.status}
-                  </span>
-                </td>
+                <td
+  className="p-3 whitespace-nowrap cursor-pointer "
+  onClick={() => handleOpenSummary(r)}
+>
+  <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
+    r.status === "Present" ? "bg-green-100 text-green-700"
+    : r.status === "Retard" ? "bg-orange-100 text-orange-600"
+    : "bg-red-100 text-red-700"
+  }`}>
+    {r.status}
+  </span>
+</td>
 
                 {/* Arrivée */}
-                <td className="p-3 text-gray-700 whitespace-nowrap">
+                <td className="p-3 text-gray-700 cursor-pointer " onClick={() => handleOpenSummary(r)}>
                   {r.arrival || "—"}
                 </td>
 
                 {/* Sortie */}
-                <td className="p-3 text-gray-700 whitespace-nowrap">
+                <td className="p-3 text-gray-700 cursor-pointer" onClick={() => handleOpenSummary(r)}>
                   {r.departure || "—"}
                 </td>
 
                 {/* Notes */}
-                <td className="p-3 text-gray-700 whitespace-nowrap">
+                <td className="p-3 text-gray-700 cursor-pointer" onClick={() => handleOpenSummary(r)}>
                   {r.notes || "—"}
                 </td>
 
@@ -222,6 +236,14 @@ export default function ListeTableau({ onDelete }) {
     onRefuse={(data) => console.log("Retard refusé :", data)}
   />
 )}
+{showSummaryModal && (
+  <SanctionSummaryModal
+    open={true}
+    onClose={() => setShowSummaryModal(false)}
+    data={summaryData}
+  />
+)}
+
 
     </div>
     

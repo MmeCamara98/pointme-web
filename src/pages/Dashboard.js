@@ -7,7 +7,7 @@ import { MessageCircle, Users, Calendar, AlertCircle, Search } from "lucide-reac
 
 
 // ✅ importe ton image
-import bgImage from "../assets/bg.png";
+import bgImage from "../assets/bg1.png";
 
 export default function Dashboard() {
   const dashboard = useSelector((state) => state.dashboard) || {};
@@ -37,7 +37,7 @@ export default function Dashboard() {
         <Header />
 
         <main className="p-6 space-y-6">
-          <span className="flex items-center justify-center text-5xl text-teal-600 font-semibold gap-2">
+          <span className="flex items-center justify-center text-xl text-teal-600 font-bold gap-2">
             Bonjour coach mbaye !
             <div className="flex items-center justify-center w-8 h-8 rounded-full bg-teal-600 shadow">
               <MessageCircle className="w-5 h-5 text-white" />

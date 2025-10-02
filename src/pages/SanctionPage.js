@@ -12,8 +12,8 @@ import {
   Plus,
 } from "lucide-react"; // ✅ tout vient de lucide-react maintenant
 import SanctionFormModal from "../component/SanctionFormModal";
-import { addSanction } from "../features/sanctionSlice";
-import bgImage from "../assets/bg.png"; // ✅ ton image dans assets
+
+import bgImage from "../assets/bg1.png"; // ✅ ton image dans assets
 
 export default function SanctionDashboard() {
   const sanctions = useSelector((state) => state.sanction.sanctions) || [];

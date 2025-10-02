@@ -13,7 +13,7 @@ import ListeTable from "../component/ListeTable";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { QRCodeCanvas } from "qrcode.react";
-import bgImage from "../assets/bg.png"; // ✅ ton image dans assets
+import bgImage from "../assets/bg1.png"; // ✅ ton image dans assets
 
 import { Download } from "lucide-react";
 

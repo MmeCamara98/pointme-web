@@ -12,6 +12,18 @@ const [summaryData, setSummaryData] = useState({
   blame: 0,
   suspension: 0,
 });
+const handleOpenSummary = (s) => {
+  setSummaryData({
+    name: s.name,
+    email: s.email,
+    image: s.image,
+    avertissement: s.avertissement,
+    blame: s.blame,
+    suspension: s.suspension,
+  });
+  setShowSummary(true);
+};
+
 
 
   return (
@@ -35,18 +47,19 @@ const [summaryData, setSummaryData] = useState({
                 className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
               >
                 {/* Stagiaire */}
-                <td className="p-3 flex items-center gap-2">
-                 <img
-                      src="https://i.pravatar.cc/40"
-                      alt="profile"
-                      className="w-10 h-10 rounded-full"
-                    />
-                  <span className="font-medium text-gray-800">{s.name}</span>
-                  <div className="text-xs text-gray-500 italic">{s.email}</div>
-                </td>
+                <td
+  className="p-3 flex items-center gap-3 cursor-pointer "
+  onClick={() => handleOpenSummary(s)}
+>
+  <img src="https://i.pravatar.cc/40" alt="profile" className="w-10 h-10 rounded-full" />
+  <div className="flex flex-col">
+    <span className="font-medium text-gray-800">{s.name}</span>
+    <span className="text-xs text-gray-500 italic">{s.email}</span>
+  </div>
+</td>
 
                 {/* Motif */}
-                <td className="p-2">
+                <td className="p-2  cursor-pointer " onClick={() => handleOpenSummary(s)}>
                   <div className="text-sm font-semibold text-gray-800 mb-1 ">
                     {s.motif}
                   </div>
@@ -55,18 +68,30 @@ const [summaryData, setSummaryData] = useState({
                   </div>
                 </td>
 
+               <td className="p-2">
+  <button
+    onClick={() => handleOpenSummary(s)}
+    className="bg-white text-black text-xs text-center border border-orange-400 rounded-xl px-3 py-1 hover:bg-orange-50"
+  >
+    {s.niveau}
+  </button>
+</td>
                 <td className="p-2">
-                  <div className="bg-white text-black text-xs text-center border border-orange-400 rounded-xl w-22">
-                    {s.niveau}
-                  </div>
+                   <button
+    onClick={() => handleOpenSummary(s)}
+    className=""
+  >
+    {s.date}
+  </button></td>
 
-                </td>
-                <td className="p-2">{s.date}</td>
                 <td className="p-2 text-red-600 font-semibold">
-                  <div className="bg-red-600 text-white text-xs  rounded-xl px-2 py-1 w-fit ">
-                    {s.statut}
-                    </div>
-                    </td>
+  <button
+    onClick={() => handleOpenSummary(s)}
+    className="bg-red-600 text-white text-xs rounded-xl px-3 py-1 hover:bg-red-700"
+  >
+    {s.statut}
+  </button>
+</td>
 
                 {/* Actions */}
                 <td className="p-2 flex gap-2">

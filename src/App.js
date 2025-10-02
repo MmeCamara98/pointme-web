@@ -5,7 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import QRcode from "./pages/QRcode";
 import Sanction from "./pages/SanctionPage";
 import Liste from "./pages/ListePointage";
-import Profil from "./pages/Profil";
+
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         <Route path="/QRcode" element={<QRcode />}/>
         <Route path="/sanction" element={<Sanction/>}/>
         <Route path="/liste" element={<Liste/>}/>
-        <Route path="/profil" element={<Profil/>}/>
+       
 
         {/* Redirection par défaut */}
         <Route path="*" element={<Navigate to="/" />} />
