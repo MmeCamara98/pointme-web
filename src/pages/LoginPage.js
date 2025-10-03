@@ -31,7 +31,7 @@ const navigate = useNavigate();
   return (
     <div className="flex min-h-screen font-sans bg-gradient-to-br from-teal-600 to-gray-50">
       {/* --- Côté gauche --- */}
-      <div className="hidden lg:flex flex-1 flex-col justify-between text-white p-10 relative overflow-hidden">
+      <div className="hidden lg:flex flex-1 flex-col justify-between text-white p-10 relative ">
         
         {/* ==== BLOBS ORANGES ==== */}
        
@@ -47,7 +47,7 @@ const navigate = useNavigate();
         </div>
 
         {/* Image + bulles */}
-        <div className="relative flex flex-grow items-center justify-center z-10">
+        <div className="relative flex flex-grow items-center justify-center z-2">
           <img
             src={loginImage}
             alt="Personne utilisant un ordinateur portable"
