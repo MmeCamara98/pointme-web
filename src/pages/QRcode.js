@@ -10,7 +10,7 @@ import bgImage from "../assets/bg1.png"; // ✅ ton image dans assets
 import DailyTable from "../component/DailyTable";
 
 import {
-  Calendar as CalendarIcon,
+  CalendarDays  as CalendarIcon,
   QrCode,
  
 } from "lucide-react"; // ✅ on prend tout ici
@@ -53,11 +53,11 @@ export default function ClockPage() {
 
         <main className="relative p-6 space-y-6 overflow-x-hidden ">
           {/* Bulls décoratifs positionnés comme dans la maquette */}
-          <Bull src={bull1} className="absolute top-20 left-20 -bottom-10 w-[600px]  z-0 pointer-events-none" />
-            <Bull src={bull2} className="absolute top-10 right-10 w-[400px]  z-0 pointer-events-none" />
+          <Bull src={bull1} className="absolute top-10 left-[40px] w-[600px] opacity-90 z-0 pointer-events-none" />
+            <Bull src={bull2} className="absolute top-10 right-[-5px] w-[450px] opacity-90 z-0 pointer-events-none" />
           
-           <Bull src={bull3} className="absolute bottom-0 -bottom-40 left-20 w-[300px]  z-0 pointer-events-none" />
-            <Bull src={bull4} className="absolute bottom-0  -bottom-40 right-10 w-[600px] z-0 pointer-events-none" />
+           <Bull src={bull3} className="absolute bottom-[-190px] left-20 w-[400px] opacity-90 z-0 pointer-events-none" />
+            <Bull src={bull4} className="absolute bottom-[-200px] right-[-5px] w-[650px] opacity-90 z-0 pointer-events-none" />
                       <div className="mb-4">
             <h3 className="text-lg font-semibold mb-2">Liste des Stagiaires</h3>
           </div>
@@ -73,9 +73,9 @@ export default function ClockPage() {
              <div className="relative">
                           <button
                             onClick={() => setOpen(!open)}
-                            className="flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-md hover:shadow-lg transition"
+                            className="flex items-center gap-2 bg-white px-10 py-3 rounded-xl shadow-md hover:shadow-lg transition"
                           >
-                            <CalendarIcon className="text-teal-600" size={22} />
+                            <CalendarIcon className="text-teal-600" size={24} />
                             <span className="text-black font-medium">Choisir une date</span>
                           </button>
             
@@ -94,9 +94,9 @@ export default function ClockPage() {
                         </div>
                         <button
               onClick={() => setShowQr(!showQr)}
-              className="flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-md hover:shadow-lg transition"
+              className="flex items-center gap-2 bg-white px-10 py-3 rounded-xl shadow-md hover:shadow-lg transition"
             >
-              <QrCode className="text-teal-600" size={22} />
+              <QrCode className="text-teal-600" size={24} />
               <span className="text-black font-medium">
                 {showQr ? "Masquer le Qr code" : "Afficher le Qr code"}
               </span>

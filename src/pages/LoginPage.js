@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginStart, loginSuccess, loginFailure } from '../features/authSlice';
-import { FaQrcode, FaChartBar, FaUserFriends } from 'react-icons/fa';
+import { FaQrcode, FaUserFriends } from 'react-icons/fa';
+import { FileText,Eye,EyeOff} from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import loginImage from '../assets/person.png';
 import bull1 from '../assets/bull1.png';
@@ -14,6 +15,7 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.auth);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -81,9 +83,9 @@ const LoginPage = () => {
         </div>
 
         {/* Carte Analytics */}
-        <div className="absolute bottom-[200px] right-[80px] bg-teal-700/80 backdrop-blur-sm rounded-3xl px-6 py-5 max-w-[240px] shadow-2xl flex items-center gap-4 z-20">
+        <div className="absolute bottom-[205px] right-[80px] bg-teal-700/80 backdrop-blur-sm rounded-3xl px-6 py-5 max-w-[240px] shadow-2xl flex items-center gap-4 z-20">
           <div className="bg-white/30 p-3 rounded-xl flex-shrink-0">
-            <FaChartBar className="w-8 h-8 text-white" />
+            <FileText className="w-8 h-8 text-white" />
           </div>
           <p className="text-base text-sm  leading-tight">
             Analytics en temps réel pour coaches et administrateurs
@@ -123,27 +125,40 @@ const LoginPage = () => {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-2xl border-2 border-gray-200 px-5 py-4 text-base text-gray-400 focus:border-teal-500 focus:outline-none focus:ring-0 transition-colors"
+                className="w-full rounded-2xl border-2 border-gray-200 px-3 py-2 text-base text-gray-400 focus:border-teal-500 focus:outline-none focus:ring-0 transition-colors"
                 placeholder="adressemail@gmail.com"
                 required
               />
             </div>
 
-            {/* Mot de passe */}
-            <div>
-              <label htmlFor="password" className="block text-base font-bold text-gray-900 mb-3">
-                Mot de passe
-              </label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-2xl border-2 border-gray-200 px-5 py-4 text-base text-gray-400 focus:border-teal-500 focus:outline-none focus:ring-0 transition-colors"
-                placeholder="Mot de passe"
-                required
-              />
-            </div>
+            <div className="relative">
+      <label
+        htmlFor="password"
+        className="block text-base font-bold text-gray-900 mb-3"
+      >
+        Mot de passe
+      </label>
+
+      {/* Champ de mot de passe */}
+      <input
+        type={showPassword ? "text" : "password"}
+        id="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="w-full rounded-2xl border-2 border-gray-200 px-3 py-2 text-base text-gray-400 focus:border-teal-500 focus:outline-none focus:ring-0 transition-colors pr-12"
+        placeholder="Mot de passe"
+        required
+      />
+
+      {/* Icône œil */}
+      <button
+        type="button"
+        onClick={() => setShowPassword(!showPassword)}
+        className="absolute right-4 top-[52px] transform  item-center-translate-y-1/2 text-gray-500 hover:text-teal-600 focus:outline-none"
+      >
+        {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
+      </button>
+    </div>
 
             {/* Mot de passe oublié */}
             <div className="text-left">

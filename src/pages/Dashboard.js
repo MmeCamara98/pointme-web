@@ -4,6 +4,7 @@ import TraineeTable from "../component/TraineeTable";
 import { useSelector } from "react-redux";
 import React, { useState } from "react";
 import { MessageCircle, Users, Calendar, AlertCircle, Search,CircleX } from "lucide-react";
+import {  FaUserFriends } from 'react-icons/fa';
 import Bull from "../component/Bull";
 import bull1 from "../assets/Blobs1 .png";
 import bull2 from "../assets/Blobs2 .png";
@@ -36,16 +37,16 @@ export default function Dashboard() {
           
           {/* Bulls décoratifs - UNIQUEMENT dans MAIN */}
           {/* Bull en haut à gauche */}
-         <Bull src={bull1} className="absolute top-20 left-20 -bottom-10 w-[600px]  z-0 pointer-events-none" />
-            <Bull src={bull2} className="absolute top-10 right-20 w-[400px]  z-0 pointer-events-none" />
+         <Bull src={bull1} className="absolute top-10 left-[40px] w-[600px] opacity-90 z-0 pointer-events-none" />
+            <Bull src={bull2} className="absolute top-10 right-[-5px] w-[450px] opacity-90 z-0 pointer-events-none" />
           
-           <Bull src={bull3} className="absolute bottom-0 -bottom-40 left-20 w-[300px]  z-0 pointer-events-none" />
-            <Bull src={bull4} className="absolute bottom-0 -bottom-40 right-10 w-[700px] z-0 pointer-events-none" />
+           <Bull src={bull3} className="absolute bottom-[-190px] left-20 w-[400px] opacity-90 z-0 pointer-events-none" />
+            <Bull src={bull4} className="absolute bottom-[-200px] right-[-5px] w-[650px] opacity-90 z-0 pointer-events-none" />
 
           {/* Contenu - au-dessus des bulls avec z-10 */}
           <div className="relative z-10 space-y-6">
             
-            <span className="flex items-center justify-center text-2xl text-teal-600 font-bold gap-2">
+            <span className="flex items-center justify-center text-3xl text-teal-600 font-bold gap-2">
               Bonjour coach mbaye !
               <div className="flex items-center justify-center w-10 h-10 rounded-full bg-teal-600 shadow-lg">
                 <MessageCircle className="w-6 h-6 text-white" />
@@ -61,7 +62,7 @@ export default function Dashboard() {
                   <p className="text-4xl font-bold text-gray-900">{total}</p>
                 </div>
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-teal-600 shadow-lg overflow-hidden">
-                  <Users className="w-7 h-7 text-white" />
+                  <FaUserFriends className="w-7 h-7 text-white" />
                 </div>
                 {/* <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-teal-100 rounded-full"></div> */}
               </div>
@@ -73,7 +74,7 @@ export default function Dashboard() {
                   <p className="text-4xl font-bold text-gray-900">{presents}</p>
                 </div>
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-teal-600 shadow-lg">
-                  <Calendar className="w-7 h-7 text-white" />
+                  <Calendar className="w-7 h-7 text-white " />
                 </div>
                 {/* <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-teal-100 rounded-full"></div> */}
               </div>

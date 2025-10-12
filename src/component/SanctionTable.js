@@ -103,7 +103,7 @@ export default function SanctionTable({ sanctions = [], onDelete }) {
                 <div className="col-span-1">
                   <button
                     onClick={() => handleOpenSummary(s)}
-                    className="bg-red-500 text-white text-sm font-medium rounded-xl px-0.5 py-0.5  transition-colors w-20"
+                    className="bg-red-500 text-white text-xs font-medium rounded-xl px-0 py-0.5  transition-colors w-20"
                   >
                     {s.statut}
                   </button>
@@ -122,7 +122,7 @@ export default function SanctionTable({ sanctions = [], onDelete }) {
 
                   {/* Bouton Supprimer */}
                   <button
-                    onClick={() => onDelete && onDelete(s.id)}
+                    onClick={() => handleOpenSummary(s)}
                     className="w-8 h-8 flex items-center justify-center border-2 border-red-100 rounded-lg hover:bg-red-50 transition-colors"
                     title="Supprimer"
                   >

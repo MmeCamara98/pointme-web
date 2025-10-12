@@ -8,19 +8,11 @@ import bull1 from "../assets/Blobs1 .png";
 import bull2 from "../assets/Blobs2 .png";
 import bull3 from "../assets/Blobs3.png";
 import bull4 from "../assets/Blobs4.png";
-
-import {
-  AlertCircle,
-  ShieldAlert,
-  Bell,
-  Search,
-  Plus,
-  MessageSquareDot,
-} from "lucide-react"; // ✅ tout vient de lucide-react maintenant
+ // ✅ tout vient de lucide-react maintenant
 import SanctionFormModal from "../component/SanctionFormModal";
-import { Ban, FileText, Clock, ThumbsDown } from "lucide-react";
+import { Ban, FileText, Clock ,Search,Plus,MessageSquareDot, Eye, EyeOff} from "lucide-react";
 
-import bgImage from "../assets/bg1.png"; // ✅ ton image dans assets
+
 
 export default function SanctionDashboard() {
   const sanctions = useSelector((state) => state.sanction.sanctions) || [];
@@ -60,11 +52,11 @@ export default function SanctionDashboard() {
 
         <main className="relative p-6 space-y-6 overflow-x-hidden">
            {/* Bulls décoratifs positionnés comme dans la maquette */}
-     <Bull src={bull1} className="absolute top-5 left-20 -bottom-10 w-[600px]  z-0 pointer-events-none" />
-            <Bull src={bull2} className="absolute top-5 right-0 w-[500px]  z-0 pointer-events-none" />
+      <Bull src={bull1} className="absolute top-10 left-[40px] w-[600px] opacity-90 z-0 pointer-events-none" />
+            <Bull src={bull2} className="absolute top-10 right-[-5px] w-[450px] opacity-90 z-0 pointer-events-none" />
           
-           <Bull src={bull3} className="absolute bottom-0 -bottom-40 left-20 w-[300px]  z-0 pointer-events-none" />
-            <Bull src={bull4} className="absolute bottom-0 -bottom-40 right-10 w-[700px] z-0 pointer-events-none" />
+           <Bull src={bull3} className="absolute bottom-[-190px] left-20 w-[400px] opacity-90 z-0 pointer-events-none" />
+            <Bull src={bull4} className="absolute bottom-[-200px] right-[-5px] w-[650px] opacity-90 z-0 pointer-events-none" />
           {/* Cartes de stats */}
          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative overflow-hidden">
   <StatCard 
