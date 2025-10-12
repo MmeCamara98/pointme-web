@@ -6,8 +6,9 @@ import SanctionSummaryModal from "./DetailPointageModal";
 export default function TraineeTable() {
   const trainees = useSelector((state) => state.trainee.trainees || []);
   const [showSummaryModal, setShowSummaryModal] = useState(false);
-    const [summaryData, setSummaryData] = useState({});
-    const handleOpenSummary = (record) => {
+  const [summaryData, setSummaryData] = useState({});
+  
+  const handleOpenSummary = (record) => {
     setSummaryData({
       name: record.name,
       email: record.email,
@@ -18,89 +19,90 @@ export default function TraineeTable() {
     });
     setShowSummaryModal(true);
   };
-  
 
   return (
-     <div className="overflow-x-auto ">
-      <table className="w-full border-collapse">
-        <thead>
-          <tr className="text-left text-lg font-semibold text-gray-700">
-            <th className="p-3">Stagiaires</th>
-            <th className="p-3">Taux de présence</th>
-            <th className="p-3 text-center">Présence</th>
-            <th className="p-3 text-center">Retard</th>
-            <th className="p-3 text-center">Absences</th>
-          </tr>
-        </thead>
-        <tbody>
-          {trainees.length > 0 ? (
-            trainees.map((t, index) => (
-              <tr
-                key={index}
-                className={index % 2 === 1 ? "bg-white" : "bg-gray-200"}
-              >
-                {/* Stagiaire */}
-                 <td
-  className="p-3 flex items-center gap-3 cursor-pointer "
-  onClick={() => handleOpenSummary(t)}
->
-  <img src="https://i.pravatar.cc/40" alt="profile" className="w-10 h-10 rounded-full" />
-  <div className="flex flex-col">
-    <span className="font-medium text-gray-800">{t.name}</span>
-    <span className="text-xs text-gray-500 italic">{t.email}</span>
-  </div>
-</td>
+    <div className="overflow-x-auto">
+      {/* En-têtes du tableau */}
+      <div className="grid grid-cols-5 gap-4 px-6 py-4 font-bold text-gray-900 text-base mb-2">
+        <div>Stagiaire</div>
+        <div>Taux de présence</div>
+        <div className="text-center">Present</div>
+        <div className="text-center">Retards</div>
+        <div className="text-center">Absences</div>
+      </div>
 
-                {/* Taux de présence */}
-                <td className="p-3 cursor-pointer" onClick={() => handleOpenSummary(t)}>
-                  <span className="text-sm">{t.tauxPresence}%</span>
-                  <div className="w-32 bg-gray-200 rounded-full h-2 mt-1">
-                    <div
-                      className="bg-teal-600 h-2 rounded-full"
-                      style={{ width: `${t.tauxPresence}%` }}
-                    ></div>
-                  </div>
-                </td>
+      {/* Corps du tableau */}
+      <div className="space-y-3">
+        {trainees.length > 0 ? (
+          trainees.map((t, index) => (
+            <div
+              key={index}
+              className="grid grid-cols-5 gap-4 items-center px-2 py-1 bg-gray-100 rounded-2xl hover:bg-gray-100 transition-colors cursor-pointer"
+              onClick={() => handleOpenSummary(t)}
+            >
+              {/* Stagiaire - Photo + Nom + Email */}
+              <div className="flex items-center gap-3">
+                <img
+                  src={"https://i.pravatar.cc/60"}
+                  alt={t.name}
+                  className="w-14 h-14 rounded-full object-cover border-2 border-gray-200"
+                />
+                <div className="flex flex-col">
+                  <span className="font-semibold text-gray-900 text-base">
+                    {t.name}
+                  </span>
+                  <span className="text-sm text-gray-500">{t.email}</span>
+                </div>
+              </div>
 
-               {/* Présence 🟩 */}
-                <td className="p-3 text-centercursor-pointer" onClick={() => handleOpenSummary(t)}>
-                  <div className="flex items-center justify-center gap-2">
-                    <div className="w-4 h-4 bg-teal-600 rounded-sm"></div>
-                    <span className="text-green-700 font-semibold">
-                      {t.present}
-                    </span>
-                  </div>
-                </td>
-                {/* Retard 🟨 */}
-                <td className="p-3 text-center cursor-pointer" onClick={() => handleOpenSummary(t)}>
-                  <div className="flex items-center justify-center gap-2">
-                    <div className="w-4 h-4 bg-yellow-500 rounded-sm"></div>
-                    <span className="text-yellow-700 font-semibold">
-                      {t.retard}
-                    </span>
-                  </div>
-                </td>
-                 {/* Absences 🟥 */}
-                <td className="p-3 text-center cursor-pointer" onClick={() => handleOpenSummary(t)}>
-                  <div className="flex items-center justify-center gap-2">
-                    <div className="w-4 h-4 bg-red-500 rounded-sm"></div>
-                    <span className="text-red-700 font-semibold">
-                      {t.absences}
-                    </span>
-                  </div>
-                </td>
+              {/* Taux de présence avec barre de progression */}
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="font-bold text-gray-900 text-base">
+                    {t.tauxPresence}%
+                  </span>
+                </div>
+                <div className="w-full bg-gray-300 rounded-full h-2.5">
+                  <div
+                    className="bg-teal-600 h-2.5 rounded-full transition-all"
+                    style={{ width: `${t.tauxPresence}%` }}
+                  ></div>
+                </div>
+              </div>
 
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="5" className="p-4 text-center text-gray-500">
-                Aucun stagiaire trouvé
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+              {/* Présence avec carré teal */}
+              <div className="flex items-center justify-center gap-2">
+                <div className="w-4 h-4 bg-teal-600 rounded"></div>
+                <span className="text-gray-900 font-semibold text-base">
+                  {t.present}
+                </span>
+              </div>
+
+              {/* Retards avec carré orange */}
+              <div className="flex items-center justify-center gap-2">
+                <div className="w-4 h-4 bg-orange-500 rounded"></div>
+                <span className="text-gray-900 font-semibold text-base">
+                  {t.retard}
+                </span>
+              </div>
+
+              {/* Absences avec carré rouge */}
+              <div className="flex items-center justify-center gap-2">
+                <div className="w-4 h-4 bg-red-500 rounded"></div>
+                <span className="text-gray-900 font-semibold text-base">
+                  {t.absences}
+                </span>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="text-center py-10 text-gray-500">
+            Aucun stagiaire trouvé
+          </div>
+        )}
+      </div>
+
+      {/* Modal */}
       {showSummaryModal && (
         <SanctionSummaryModal
           open={true}
@@ -108,6 +110,6 @@ export default function TraineeTable() {
           data={summaryData}
         />
       )}
-     </div>
+    </div>
   );
 }

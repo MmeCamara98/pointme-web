@@ -15,7 +15,7 @@ export default function SanctionSummaryModal({ open, onClose, data }) {
           <img
             src={ "https://i.pravatar.cc/60"}
             alt="profile"
-            className="w-14 h-14 rounded-full object-cover"
+            className="w-14 h-14 rounded-full object-cover border-2 border-gray-200"
           />
           <div>
             <div className="text-base font-semibold text-gray-800">

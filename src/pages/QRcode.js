@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Clock, AlertCircle, Search, Download } from "lucide-react";
+import { Clock, AlertCircle, Search, Download,UserCheck} from "lucide-react";
 import Sidebar from "../component/Sidebar";
 import Header from "../component/Header";
 
@@ -15,6 +15,11 @@ import {
  
 } from "lucide-react"; // ✅ on prend tout ici
 import QrCodeModal from "../component/QrCodeModal";
+import Bull from "../component/Bull";
+import bull1 from "../assets/Blobs1 .png";
+import bull2 from "../assets/Blobs2 .png";
+import bull3 from "../assets/Blobs3.png";
+import bull4 from "../assets/Blobs4.png";
 
 
 export default function ClockPage() {
@@ -36,13 +41,8 @@ export default function ClockPage() {
   const lateCount = records.filter((r) => r.status === "En retard").length;
 
   return (
-    <div
-      className="flex h-screen"
-      style={{
-        backgroundImage: `url(${bgImage})`,
-        backgroundSize: "",
-        backgroundPosition: "center",
-      }}
+    <div className="flex h-screen bg-gray-50"
+  
     >
       {/* Sidebar */}
       <Sidebar />
@@ -51,19 +51,25 @@ export default function ClockPage() {
       <div className="flex-1 flex flex-col ">
         <Header />
 
-        <main className="p-6 space-y-6">
-          <div className="mb-4">
+        <main className="relative p-6 space-y-6 overflow-x-hidden ">
+          {/* Bulls décoratifs positionnés comme dans la maquette */}
+          <Bull src={bull1} className="absolute top-20 left-20 -bottom-10 w-[600px]  z-0 pointer-events-none" />
+            <Bull src={bull2} className="absolute top-10 right-10 w-[400px]  z-0 pointer-events-none" />
+          
+           <Bull src={bull3} className="absolute bottom-0 -bottom-40 left-20 w-[300px]  z-0 pointer-events-none" />
+            <Bull src={bull4} className="absolute bottom-0  -bottom-40 right-10 w-[600px] z-0 pointer-events-none" />
+                      <div className="mb-4">
             <h3 className="text-lg font-semibold mb-2">Liste des Stagiaires</h3>
           </div>
 
           {/* Cartes de résumé */}
           <div className="flex space-x-10 ">
-            <Card title="À l'heure" value={onTimeCount} icon={<Clock />} />
-            <Card title="En retard" value={lateCount} icon={<AlertCircle />} />
+            <Card title="À l'heure" value={onTimeCount} icon={<UserCheck />} />
+            <Card title="En retard" value={lateCount} icon={<Clock/>} />
           </div>
 
           {/* Sélecteur de date */}
-          <div className="flex items-center gap-4 p-4">
+          <div className="flex items-center gap-4 p-4  relative overflow-hidden">
              <div className="relative">
                           <button
                             onClick={() => setOpen(!open)}
@@ -103,7 +109,7 @@ export default function ClockPage() {
                       </div>
 
           {/* Filtres + recherche + export */}
-          <div className="bg-white p-6 rounded-2xl shadow">
+          <div className="bg-white p-6 rounded-2xl shadow  relative overflow-hidden bottom-5">
             <div className="flex space-x-2">
               {/* Barre de recherche */}
               <div className="flex items-center gap-2 border px-3 py-2 rounded-xl bg-white w-60 shadow-lg">
@@ -148,7 +154,7 @@ export default function ClockPage() {
 
 function Card({ title, value, icon }) {
   return (
-    <div className="flex justify-between items-center bg-white p-6 gap-2 rounded-2xl shadow-2xl w-80">
+    <div className="flex justify-between items-center bg-white p-6 gap-2 rounded-2xl shadow-2xl w-80  relative overflow-hidden">
       <div>
         <h3 className="text-black font-bold text-lg">{title}</h3>
         <p className="text-2xl font-bold">{value}</p>

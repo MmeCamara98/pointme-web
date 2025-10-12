@@ -18,7 +18,7 @@ export default function ProfileModal({ open, onClose, user }) {
         <img
           src={user?.image || "https://i.pravatar.cc/100"}
           alt="profile"
-          className="w-20 h-20 rounded-full object-cover bg-yellow-400"
+          className="w-14 h-14 rounded-full object-cover border-2 border-gray-200"
         />
         <div>
           <h2 className="text-lg font-semibold text-gray-800">
